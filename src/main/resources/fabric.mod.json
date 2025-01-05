@@ -15,6 +15,9 @@
     ],
     "main": [
       "com.aznos.coffee.Coffee"
+    ],
+    "fabric-datagen": [
+      "com.aznos.coffee.CoffeeDataGenerator"
     ]
   },
   "mixins": [
