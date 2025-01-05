@@ -1,6 +1,7 @@
 package com.aznos.coffee.item;
 
 import com.aznos.coffee.Coffee;
+import com.aznos.coffee.item.custom.CoffeeCupItem;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -18,7 +19,7 @@ public class ModItems {
 
     public static final Item COFFEE_CUP = registerItem(
             "coffee_cup",
-            new Item(new Item.Settings().food(COFFEE_CUP_COMPONENT))
+            new CoffeeCupItem(new Item.Settings().food(COFFEE_CUP_COMPONENT).maxCount(1))
     );
 
     private static Item registerItem(String name, Item item) {
