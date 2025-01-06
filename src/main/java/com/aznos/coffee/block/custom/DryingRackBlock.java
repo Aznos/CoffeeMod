@@ -1,6 +1,7 @@
 package com.aznos.coffee.block.custom;
 
 import com.aznos.coffee.block.entity.custom.DryingRackBlockEntity;
+import com.aznos.coffee.item.ModItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -84,9 +85,11 @@ public class DryingRackBlock extends BlockWithEntity implements BlockEntityProvi
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if(world.getBlockEntity(pos) instanceof DryingRackBlockEntity dryingRackBE) {
             if(dryingRackBE.isEmpty() && !stack.isEmpty()) { // Place
-                dryingRackBE.setStack(0, stack);
-                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 2f);
-                stack.decrement(1);
+                if(stack.getItem().equals(ModItems.RAW_COFFEE_BEAN)) {
+                    dryingRackBE.setStack(0, stack);
+                    world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 2f);
+                    stack.decrement(1);
+                }
             } else if(stack.isEmpty()) { // Pickup
                 ItemStack stackOnRack = dryingRackBE.getStack(0);
                 player.setStackInHand(Hand.MAIN_HAND, stackOnRack);
