@@ -1,6 +1,7 @@
 package com.aznos.coffee.item;
 
 import com.aznos.coffee.Coffee;
+import com.aznos.coffee.block.ModBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ public class ModItemGroups {
                         entries.add(ModItems.COFFEE_CHERRY_SEEDS);
                         entries.add(ModItems.COFFEE_CHERRY);
                         entries.add(ModItems.RAW_COFFEE_BEAN);
+                        entries.add(ModBlocks.DRYING_RACK);
                     }).build());
 
     public static void registerItemGroups() {

@@ -5,6 +5,7 @@
   "item.coffee.raw_coffee_bean": "Raw Coffee Bean",
 
   "block.coffee.coffee_cherry_crop": "Coffee Cherry Crop",
+  "block.coffee.drying_rack": "Drying Rack",
 
   "itemgroup.coffee": "Coffee"
 }

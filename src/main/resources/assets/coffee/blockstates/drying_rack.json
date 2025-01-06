@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "coffee:block/drying_rack"
+    },
+    "facing=south": {
+      "model": "coffee:block/drying_rack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "coffee:block/drying_rack",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "coffee:block/drying_rack",
+      "y": 90
+    }
+  }
+}

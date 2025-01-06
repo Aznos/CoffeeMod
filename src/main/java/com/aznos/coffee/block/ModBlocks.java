@@ -2,6 +2,7 @@ package com.aznos.coffee.block;
 
 import com.aznos.coffee.Coffee;
 import com.aznos.coffee.block.custom.CoffeeCherryCropBlock;
+import com.aznos.coffee.block.custom.DryingRackBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -16,6 +17,14 @@ public class ModBlocks {
             "coffee_cherry_crop",
             new CoffeeCherryCropBlock(
                     AbstractBlock.Settings.copy(Blocks.WHEAT)
+            )
+    );
+
+    public static final Block DRYING_RACK = registerBlock(
+            "drying_rack",
+            new DryingRackBlock(
+                    AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)
+                            .nonOpaque()
             )
     );
 
