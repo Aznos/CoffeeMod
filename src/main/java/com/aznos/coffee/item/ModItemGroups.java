@@ -18,6 +18,7 @@ public class ModItemGroups {
                         entries.add(ModItems.COFFEE_CUP);
                         entries.add(ModItems.COFFEE_CHERRY_SEEDS);
                         entries.add(ModItems.COFFEE_CHERRY);
+                        entries.add(ModItems.RAW_COFFEE_BEAN);
                     }).build());
 
     public static void registerItemGroups() {
