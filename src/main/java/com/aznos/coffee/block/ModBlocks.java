@@ -1,7 +1,10 @@
 package com.aznos.coffee.block;
 
 import com.aznos.coffee.Coffee;
+import com.aznos.coffee.block.custom.CoffeeCherryCropBlock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -9,6 +12,21 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
+    public static final Block COFFEE_CHERRY_CROP = registerBlockWithoutBlockItem(
+            "coffee_cherry_crop",
+            new CoffeeCherryCropBlock(
+                    AbstractBlock.Settings.copy(Blocks.WHEAT)
+            )
+    );
+
+    private static Block registerBlockWithoutBlockItem(String name, Block block) {
+        return Registry.register(
+                Registries.BLOCK,
+                Identifier.of(Coffee.MOD_ID, name),
+                block
+        );
+    }
+
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
         return Registry.register(

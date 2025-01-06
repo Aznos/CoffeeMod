@@ -16,6 +16,7 @@ public class ModItemGroups {
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.coffee"))
                     .icon(() -> new ItemStack(ModItems.COFFEE_CUP)).entries((displayContext, entries) -> {
                         entries.add(ModItems.COFFEE_CUP);
+                        entries.add(ModItems.COFFEE_CHERRY_SEEDS);
                     }).build());
 
     public static void registerItemGroups() {

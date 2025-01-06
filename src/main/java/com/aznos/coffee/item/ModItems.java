@@ -1,9 +1,11 @@
 package com.aznos.coffee.item;
 
 import com.aznos.coffee.Coffee;
+import com.aznos.coffee.block.ModBlocks;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -21,6 +23,14 @@ public class ModItems {
             new Item(new Item.Settings()
                     .food(COFFEE_CUP_COMPONENT)
                     .maxCount(1)
+            )
+    );
+
+    public static final Item COFFEE_CHERRY_SEEDS = registerItem(
+            "coffee_cherry_seeds",
+            new AliasedBlockItem(
+                    ModBlocks.COFFEE_CHERRY_CROP,
+                    new Item.Settings()
             )
     );
 

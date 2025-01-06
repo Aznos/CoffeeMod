@@ -1,6 +1,7 @@
 package com.aznos.coffee.datagen;
 
-import com.aznos.coffee.item.ModItemGroups;
+import com.aznos.coffee.block.ModBlocks;
+import com.aznos.coffee.block.custom.CoffeeCherryCropBlock;
 import com.aznos.coffee.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -15,7 +16,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-
+        blockStateModelGenerator.registerCrop(ModBlocks.COFFEE_CHERRY_CROP, CoffeeCherryCropBlock.AGE, 0, 1, 2, 3, 4, 5);
     }
 
     @Override

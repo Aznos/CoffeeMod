@@ -1,5 +1,8 @@
 {
   "item.coffee.coffee_cup": "Coffee Cup",
+  "item.coffee.coffee_cherry_seeds": "Coffee Cherry Seeds",
+
+  "block.coffee.coffee_cherry_crop": "Coffee Cherry Crop",
 
   "itemgroup.coffee": "Coffee"
 }
