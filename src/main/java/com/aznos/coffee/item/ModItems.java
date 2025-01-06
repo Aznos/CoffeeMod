@@ -34,6 +34,18 @@ public class ModItems {
             )
     );
 
+    public static final Item COFFEE_CHERRY = registerItem(
+            "coffee_cherry",
+            new Item(new Item.Settings()
+                    .food(new FoodComponent.Builder()
+                            .saturationModifier(0.3F)
+                            .nutrition(1)
+                            .snack()
+                            .build()
+                    )
+            )
+    );
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Coffee.MOD_ID, name), item);
     }

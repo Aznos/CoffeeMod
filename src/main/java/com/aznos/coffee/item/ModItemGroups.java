@@ -17,6 +17,7 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(ModItems.COFFEE_CUP)).entries((displayContext, entries) -> {
                         entries.add(ModItems.COFFEE_CUP);
                         entries.add(ModItems.COFFEE_CHERRY_SEEDS);
+                        entries.add(ModItems.COFFEE_CHERRY);
                     }).build());
 
     public static void registerItemGroups() {
