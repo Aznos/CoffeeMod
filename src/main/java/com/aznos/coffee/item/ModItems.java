@@ -46,6 +46,11 @@ public class ModItems {
             )
     );
 
+    public static final Item RAW_COFFEE_BEAN = registerItem(
+            "raw_coffee_bean",
+            new Item(new Item.Settings())
+    );
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(Coffee.MOD_ID, name), item);
     }
