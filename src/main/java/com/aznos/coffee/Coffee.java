@@ -1,6 +1,7 @@
 package com.aznos.coffee;
 
 import com.aznos.coffee.block.entity.ModBlockEntities;
+import com.aznos.coffee.components.ModDataComponentTypes;
 import com.aznos.coffee.item.ModItemGroups;
 import com.aznos.coffee.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -18,5 +19,6 @@ public class Coffee implements ModInitializer {
         ModItems.registerModItems();
         ModItemGroups.registerItemGroups();
         ModBlockEntities.registerBlockEntities();
+        ModDataComponentTypes.registerDataComponentTypes();
     }
 }
