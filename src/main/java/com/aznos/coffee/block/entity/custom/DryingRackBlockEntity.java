@@ -1,7 +1,8 @@
 package com.aznos.coffee.block.entity.custom;
 
 import com.aznos.coffee.block.entity.ModBlockEntities;
-import com.aznos.coffee.item.ModItems;
+import com.aznos.coffee.components.ModDataComponentTypes;
+import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +17,6 @@ import net.minecraft.world.World;
 
 public class DryingRackBlockEntity extends BlockEntity implements Inventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
-    private int dehydrationLevel = 0;
 
     public DryingRackBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DRYING_RACK_BE, pos, state);
@@ -87,14 +87,16 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
         Inventories.readNbt(nbt, inventory, registryLookup);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, DryingRackBlockEntity be) {
-        if(!world.isClient) {
-            ItemStack stack = be.getStack(0);
-            if(!stack.isEmpty() && stack.getItem() == ModItems.RAW_COFFEE_BEAN) {
-                if(world.getTime() % 40 == 0) { // every 40 ticks
-                    if(be.dehydrationLevel < 100) {
-                        be.dehydrationLevel++;
-                    }
+    public static void tick(World world, BlockPos pos, BlockState state, DryingRackBlockEntity blockEntity) {
+        if(!world.isClient && world.getTime() % 40 == 0) { // 2 seconds
+            ItemStack stack = blockEntity.getStack(0);
+            if(!stack.isEmpty() && stack.getItem() instanceof RawCoffeeBeanItem) {
+                Integer levelObj = stack.get(ModDataComponentTypes.DEHYDRATION_LEVEL);
+                int level = (levelObj != null) ? levelObj : 0;
+
+                if(level < 100) {
+                    level++;
+                    stack.set(ModDataComponentTypes.DEHYDRATION_LEVEL, level);
                 }
             }
         }

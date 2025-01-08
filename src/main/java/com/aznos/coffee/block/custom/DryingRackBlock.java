@@ -105,8 +105,7 @@ public class DryingRackBlock extends BlockWithEntity {
     }
 
     @Override
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return type.equals(ModBlockEntities.DRYING_RACK_BE) ? (world1, pos, state1, blockEntity) -> DryingRackBlockEntity.tick(world1, pos, state1, (DryingRackBlockEntity) blockEntity) : null;
     }
 }

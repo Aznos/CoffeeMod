@@ -2,6 +2,7 @@ package com.aznos.coffee.item;
 
 import com.aznos.coffee.Coffee;
 import com.aznos.coffee.block.ModBlocks;
+import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -48,7 +49,7 @@ public class ModItems {
 
     public static final Item RAW_COFFEE_BEAN = registerItem(
             "raw_coffee_bean",
-            new Item(new Item.Settings())
+            new RawCoffeeBeanItem(new Item.Settings())
     );
 
     private static Item registerItem(String name, Item item) {
