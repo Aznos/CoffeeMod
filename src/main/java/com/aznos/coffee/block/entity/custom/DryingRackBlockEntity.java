@@ -4,14 +4,12 @@ import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.item.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -93,14 +91,9 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
         if(!world.isClient) {
             ItemStack stack = be.getStack(0);
             if(!stack.isEmpty() && stack.getItem() == ModItems.RAW_COFFEE_BEAN) {
-                be.dehydrationLevel++;
-
-                if(be.dehydrationLevel >= 20 * 2) { //2 seconds per 1 dehydration level
-                    be.dehydrationLevel = 0;
-                    be.markDirty();
-
-                    if(MinecraftClient.getInstance().player != null) {
-                        MinecraftClient.getInstance().player.sendMessage(Text.of("Dehydration level: " + be.dehydrationLevel), false);
+                if(world.getTime() % 40 == 0) { // every 40 ticks
+                    if(be.dehydrationLevel < 100) {
+                        be.dehydrationLevel++;
                     }
                 }
             }
