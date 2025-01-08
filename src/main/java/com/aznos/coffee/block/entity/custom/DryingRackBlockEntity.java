@@ -3,12 +3,14 @@ package com.aznos.coffee.block.entity.custom;
 import com.aznos.coffee.block.entity.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
@@ -82,5 +84,11 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
         Inventories.readNbt(nbt, inventory, registryLookup);
+    }
+
+    public static void tick() {
+        if(MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().world != null) {
+            MinecraftClient.getInstance().player.sendMessage(Text.of("Drying Rack Block Entity Ticked"));
+        }
     }
 }
