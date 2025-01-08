@@ -1,6 +1,7 @@
 package com.aznos.coffee.block.entity.custom;
 
 import com.aznos.coffee.block.entity.ModBlockEntities;
+import com.aznos.coffee.item.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
@@ -13,9 +14,11 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class DryingRackBlockEntity extends BlockEntity implements Inventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    private int dehydrationLevel = 0;
 
     public DryingRackBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DRYING_RACK_BE, pos, state);
@@ -86,9 +89,21 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
         Inventories.readNbt(nbt, inventory, registryLookup);
     }
 
-    public static void tick() {
-        if(MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().world != null) {
-            MinecraftClient.getInstance().player.sendMessage(Text.of("Drying Rack Block Entity Ticked"));
+    public static void tick(World world, BlockPos pos, BlockState state, DryingRackBlockEntity be) {
+        if(!world.isClient) {
+            ItemStack stack = be.getStack(0);
+            if(!stack.isEmpty() && stack.getItem() == ModItems.RAW_COFFEE_BEAN) {
+                be.dehydrationLevel++;
+
+                if(be.dehydrationLevel >= 20 * 2) { //2 seconds per 1 dehydration level
+                    be.dehydrationLevel = 0;
+                    be.markDirty();
+
+                    if(MinecraftClient.getInstance().player != null) {
+                        MinecraftClient.getInstance().player.sendMessage(Text.of("Dehydration level: " + be.dehydrationLevel), false);
+                    }
+                }
+            }
         }
     }
 }

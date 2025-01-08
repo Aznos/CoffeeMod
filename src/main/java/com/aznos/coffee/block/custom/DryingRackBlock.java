@@ -1,10 +1,13 @@
 package com.aznos.coffee.block.custom;
 
+import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.block.entity.custom.DryingRackBlockEntity;
 import com.aznos.coffee.item.ModItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -24,7 +27,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class DryingRackBlock extends BlockWithEntity implements BlockEntityProvider {
+public class DryingRackBlock extends BlockWithEntity {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final MapCodec<DryingRackBlock> CODEC = DryingRackBlock.createCodec(DryingRackBlock::new);
 
@@ -99,5 +102,11 @@ public class DryingRackBlock extends BlockWithEntity implements BlockEntityProvi
         }
 
         return ItemActionResult.SUCCESS;
+    }
+
+    @Override
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return type.equals(ModBlockEntities.DRYING_RACK_BE) ? (world1, pos, state1, blockEntity) -> DryingRackBlockEntity.tick(world1, pos, state1, (DryingRackBlockEntity) blockEntity) : null;
     }
 }
