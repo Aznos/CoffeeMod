@@ -2,6 +2,7 @@ package com.aznos.coffee;
 
 import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.components.ModDataComponentTypes;
+import com.aznos.coffee.damage.ModDamageTypes;
 import com.aznos.coffee.item.ModItemGroups;
 import com.aznos.coffee.item.ModItems;
 import com.aznos.coffee.screen.ModScreenHandlers;
@@ -22,5 +23,6 @@ public class Coffee implements ModInitializer {
         ModBlockEntities.registerBlockEntities();
         ModDataComponentTypes.registerDataComponentTypes();
         ModScreenHandlers.registerScreenHandlers();
+        ModDamageTypes.registerDamageTypes();
     }
 }

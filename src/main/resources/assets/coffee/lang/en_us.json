@@ -12,5 +12,8 @@
   "block.coffee.drying_rack": "Drying Rack",
   "block.coffee.brewer": "Brewer",
 
-  "itemgroup.coffee": "Coffee"
+  "itemgroup.coffee": "Coffee",
+
+  "death.attack.caffeine_damage": "Player couldn't handle the caffeine",
+  "death.attack.caffeine_damage.player": "Player couldn't handle the caffeine while fighting %s"
 }
