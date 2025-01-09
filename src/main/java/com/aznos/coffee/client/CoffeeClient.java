@@ -4,8 +4,11 @@ import com.aznos.coffee.block.ModBlocks;
 import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.block.entity.renderer.BrewerBlockEntityRenderer;
 import com.aznos.coffee.block.entity.renderer.DryingRackBlockEntityRenderer;
+import com.aznos.coffee.screen.ModScreenHandlers;
+import com.aznos.coffee.screen.custom.BrewerScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
@@ -25,5 +28,7 @@ public class CoffeeClient implements ClientModInitializer {
                 ModBlockEntities.BREWER_BE,
                 BrewerBlockEntityRenderer::new
         );
+
+        HandledScreens.register(ModScreenHandlers.BREWER_SCREEN_HANDLER, BrewerScreen::new);
     }
 }

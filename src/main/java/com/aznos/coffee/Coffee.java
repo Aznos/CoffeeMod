@@ -4,6 +4,7 @@ import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.components.ModDataComponentTypes;
 import com.aznos.coffee.item.ModItemGroups;
 import com.aznos.coffee.item.ModItems;
+import com.aznos.coffee.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 
 import java.util.logging.Logger;
@@ -20,5 +21,6 @@ public class Coffee implements ModInitializer {
         ModItemGroups.registerItemGroups();
         ModBlockEntities.registerBlockEntities();
         ModDataComponentTypes.registerDataComponentTypes();
+        ModScreenHandlers.registerScreenHandlers();
     }
 }
