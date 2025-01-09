@@ -40,6 +40,16 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(Blocks.OAK_PLANKS), conditionsFromItem(Blocks.OAK_PLANKS))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModItems.MORTAR_AND_PESTLE)
+                .pattern("  S")
+                .pattern("GSG")
+                .pattern(" G ")
+                .input('G', Blocks.GRAY_TERRACOTTA)
+                .input('S', Items.STICK)
+                .criterion(hasItem(Blocks.GRAY_TERRACOTTA), conditionsFromItem(Blocks.GRAY_TERRACOTTA))
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .offerTo(exporter);
+
         offerSmelting(exporter, Collections.singletonList(ModItems.DEHYDRATED_COFFEE_BEAN), RecipeCategory.FOOD, ModItems.ROASTED_COFFEE_BEAN, 0.4f, 60, Coffee.MOD_ID);
     }
 }
