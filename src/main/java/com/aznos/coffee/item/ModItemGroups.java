@@ -21,6 +21,7 @@ public class ModItemGroups {
                         entries.add(ModItems.COFFEE_CHERRY);
                         entries.add(ModItems.RAW_COFFEE_BEAN);
                         entries.add(ModItems.DEHYDRATED_COFFEE_BEAN);
+                        entries.add(ModItems.ROASTED_COFFEE_BEAN);
                         entries.add(ModBlocks.DRYING_RACK);
                     }).build());
 

@@ -1,5 +1,6 @@
 package com.aznos.coffee.datagen;
 
+import com.aznos.coffee.Coffee;
 import com.aznos.coffee.block.ModBlocks;
 import com.aznos.coffee.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -12,6 +13,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 
+import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeGenerator extends FabricRecipeProvider {
@@ -37,5 +39,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(Items.STRING), conditionsFromItem(Items.STRING))
                 .criterion(hasItem(Blocks.OAK_PLANKS), conditionsFromItem(Blocks.OAK_PLANKS))
                 .offerTo(exporter);
+
+        offerSmelting(exporter, Collections.singletonList(ModItems.DEHYDRATED_COFFEE_BEAN), RecipeCategory.FOOD, ModItems.ROASTED_COFFEE_BEAN, 0.4f, 60, Coffee.MOD_ID);
     }
 }
