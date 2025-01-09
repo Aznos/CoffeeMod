@@ -2,6 +2,7 @@ package com.aznos.coffee.block.entity.custom;
 
 import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.components.ModDataComponentTypes;
+import com.aznos.coffee.item.ModItems;
 import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -97,6 +98,8 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
                 if(level < 100) {
                     level++;
                     stack.set(ModDataComponentTypes.DEHYDRATION_LEVEL, level);
+                } else if(level == 100) {
+                    blockEntity.setStack(0, new ItemStack(ModItems.DEHYDRATED_COFFEE_BEAN));
                 }
             }
         }
