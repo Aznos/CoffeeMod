@@ -2,6 +2,7 @@ package com.aznos.coffee.item;
 
 import com.aznos.coffee.Coffee;
 import com.aznos.coffee.block.ModBlocks;
+import com.aznos.coffee.item.custom.MortarAndPestle;
 import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -64,10 +65,15 @@ public class ModItems {
 
     public static final Item MORTAR_AND_PESTLE = registerItem(
             "mortar_and_pestle",
-            new Item(new Item.Settings()
+            new MortarAndPestle(new Item.Settings()
                     .maxCount(1)
                     .maxDamage(64)
             )
+    );
+
+    public static final Item COFFEE_POWDER = registerItem(
+            "coffee_powder",
+            new Item(new Item.Settings())
     );
 
     private static Item registerItem(String name, Item item) {
