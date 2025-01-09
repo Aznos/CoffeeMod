@@ -25,6 +25,7 @@ public class ModItemGroups {
                         entries.add(ModItems.COFFEE_POWDER);
                         entries.add(ModBlocks.DRYING_RACK);
                         entries.add(ModItems.MORTAR_AND_PESTLE);
+                        entries.add(ModBlocks.BREWER);
                     }).build());
 
     public static void registerItemGroups() {

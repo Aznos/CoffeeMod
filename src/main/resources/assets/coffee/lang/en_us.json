@@ -10,6 +10,7 @@
 
   "block.coffee.coffee_cherry_crop": "Coffee Cherry Crop",
   "block.coffee.drying_rack": "Drying Rack",
+  "block.coffee.brewer": "Brewer",
 
   "itemgroup.coffee": "Coffee"
 }

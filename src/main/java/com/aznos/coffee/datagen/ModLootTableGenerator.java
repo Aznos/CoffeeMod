@@ -22,5 +22,7 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
                 .properties(StatePredicate.Builder.create().exactMatch(CoffeeCherryCropBlock.AGE, 5));
 
         addDrop(ModBlocks.COFFEE_CHERRY_CROP, cropDrops(ModBlocks.COFFEE_CHERRY_CROP, ModItems.COFFEE_CHERRY, ModItems.COFFEE_CHERRY_SEEDS, builder));
+        addDrop(ModBlocks.DRYING_RACK);
+        addDrop(ModBlocks.BREWER);
     }
 }
