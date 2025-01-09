@@ -94,7 +94,7 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
 
     @Override
     public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new BrewerScreenHandler(syncId, playerInventory, this.pos);
+        return new BrewerScreenHandler(syncId, playerInventory, this, propertyDelegate);
     }
 
     @Override
