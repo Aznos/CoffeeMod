@@ -23,6 +23,7 @@ public class ModItemGroups {
                         entries.add(ModItems.DEHYDRATED_COFFEE_BEAN);
                         entries.add(ModItems.ROASTED_COFFEE_BEAN);
                         entries.add(ModBlocks.DRYING_RACK);
+                        entries.add(ModItems.MORTAR_AND_PESTLE);
                     }).build());
 
     public static void registerItemGroups() {
