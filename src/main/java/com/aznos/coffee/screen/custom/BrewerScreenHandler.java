@@ -33,7 +33,7 @@ public class BrewerScreenHandler extends ScreenHandler {
 
         this.addSlot(new Slot(inventory, 0, 54, 34));
         this.addSlot(new Slot(inventory, 1, 104, 34));
-        this.addSlot(new Slot(inventory, 2, 150, 61));
+        this.addSlot(new Slot(inventory, 2, 151, 62));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
