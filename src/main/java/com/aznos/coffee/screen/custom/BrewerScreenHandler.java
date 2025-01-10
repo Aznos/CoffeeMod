@@ -19,7 +19,7 @@ public class BrewerScreenHandler extends ScreenHandler {
     private final BrewerBlockEntity be;
 
     public BrewerScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
-        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos), new ArrayPropertyDelegate(2));
+        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos), new ArrayPropertyDelegate(4));
     }
 
     public BrewerScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelagate) {
@@ -50,6 +50,14 @@ public class BrewerScreenHandler extends ScreenHandler {
         int maxProgress = this.propertyDelegate.get(1);
         int arrowPixelSize = 24;
         return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
+    }
+
+    public int getWaterAmount() {
+        return this.propertyDelegate.get(2);
+    }
+
+    public int getTankCapacity() {
+        return this.propertyDelegate.get(3);
     }
 
     @Override

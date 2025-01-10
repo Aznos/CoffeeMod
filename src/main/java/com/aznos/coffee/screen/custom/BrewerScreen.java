@@ -36,6 +36,28 @@ public class BrewerScreen extends HandledScreen<BrewerScreenHandler> {
 
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
         renderProgressArrow(context, x, y);
+        renderWaterBar(context, x, y);
+    }
+
+    private void renderWaterBar(DrawContext context, int x, int y) {
+        int barX = x + 150;
+        int barY = y + 6;
+        int barWidth = 17;
+        int barHeight = 51;
+
+        context.fill(barX, barY, barX + barWidth, barY + barHeight, 0xFF202020);
+
+        int waterAmount = handler.getWaterAmount();
+        int capacity = handler.getTankCapacity();
+        if(capacity <= 0) return;
+        int filled = waterAmount * barHeight / capacity;
+
+        if(filled > 0) {
+            int fillTop = barY + (barHeight - filled);
+            int waterColor = 0xFF0000FF;
+
+            context.fill(barX, fillTop, barX + barWidth, barY + barHeight, waterColor);
+        }
     }
 
     private void renderProgressArrow(DrawContext context, int x, int y) {

@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -37,14 +38,21 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
     private int maxProgress = 72;
     private final int DEFAULT_MAX_PROGRESS = 72;
 
+    public static final int TANK_CAPACITY = 1000;
+    public static final int WATER_PER_BREW = 200;
+    private int waterAmount = 0;
+
     public BrewerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BREWER_BE, pos, state);
+
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch(index) {
                     case 0 -> BrewerBlockEntity.this.progress;
                     case 1 -> BrewerBlockEntity.this.maxProgress;
+                    case 2 -> BrewerBlockEntity.this.waterAmount;
+                    case 3 -> TANK_CAPACITY;
                     default -> 0;
                 };
             }
@@ -52,14 +60,15 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
             @Override
             public void set(int index, int value) {
                 switch(index) {
-                    case 0: BrewerBlockEntity.this.progress = value;
-                    case 1: BrewerBlockEntity.this.maxProgress = value;
+                    case 0 -> BrewerBlockEntity.this.progress = value;
+                    case 1 -> BrewerBlockEntity.this.maxProgress = value;
+                    case 2 -> BrewerBlockEntity.this.waterAmount = value;
                 }
             }
 
             @Override
             public int size() {
-                return 2;
+                return 4;
             }
         };
     }
@@ -71,12 +80,14 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
 
         nbt.putInt("brewer.progress", progress);
         nbt.putInt("brewer.max_progress", maxProgress);
+        nbt.putInt("brewer.water_amount", waterAmount);
     }
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         progress = nbt.getInt("brewer.progress");
         maxProgress = nbt.getInt("brewer.max_progress");
+        waterAmount = nbt.getInt("brewer.water_amount");
 
         super.readNbt(nbt, registryLookup);
         Inventories.readNbt(nbt, inventory, registryLookup);
@@ -103,6 +114,8 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
+        handleBucketInsertion();
+
         if(hasRecipe() && canInsertIntoOutputSlot()) {
             increaseCraftingProgress();
             markDirty(world, pos, state);
@@ -116,11 +129,27 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
         }
     }
 
-    private boolean hasRecipe() {
-        ItemStack input = new ItemStack(ModItems.COFFEE_POWDER);
-        ItemStack output = new ItemStack(ModItems.COFFEE_CUP);
+    private void handleBucketInsertion() {
+        ItemStack fluidStack = this.getStack(FLUID_ITEM_SLOT);
 
-        return this.getStack(INPUT_SLOT).getItem() == input.getItem() && canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
+        if(fluidStack.getItem() == Items.WATER_BUCKET) {
+            if(this.waterAmount + 1000 <= TANK_CAPACITY) {
+                this.waterAmount += 1000;
+
+                this.removeStack(FLUID_ITEM_SLOT, 1);
+                this.setStack(FLUID_ITEM_SLOT, new ItemStack(Items.BUCKET, 1));
+            }
+        }
+    }
+
+    private boolean hasRecipe() {
+        boolean hasCoffeePowder = this.getStack(INPUT_SLOT).getItem() == ModItems.COFFEE_POWDER;
+        boolean hasWater = this.waterAmount >= WATER_PER_BREW;
+
+        if(!hasCoffeePowder || !hasWater) return false;
+
+        ItemStack output = new ItemStack(ModItems.COFFEE_CUP);
+        return canInsertAmountIntoOutputSlot(output.getCount()) && canInsertItemIntoOutputSlot(output);
     }
 
     private boolean canInsertAmountIntoOutputSlot(int count) {
@@ -146,6 +175,9 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
     private void craftItem() {
         this.removeStack(INPUT_SLOT, 1);
         this.setStack(OUTPUT_SLOT, new ItemStack(ModItems.COFFEE_CUP, this.getStack(OUTPUT_SLOT).getCount() + 1));
+
+        this.waterAmount -= WATER_PER_BREW;
+        if(this.waterAmount < 0) this.waterAmount = 0;
     }
 
     private void resetProgress() {
