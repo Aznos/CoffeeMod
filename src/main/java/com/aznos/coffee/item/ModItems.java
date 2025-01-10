@@ -2,6 +2,7 @@ package com.aznos.coffee.item;
 
 import com.aznos.coffee.Coffee;
 import com.aznos.coffee.block.ModBlocks;
+import com.aznos.coffee.item.custom.CoffeeCherryItem;
 import com.aznos.coffee.item.custom.CoffeeCupItem;
 import com.aznos.coffee.item.custom.MortarAndPestle;
 import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
@@ -39,7 +40,7 @@ public class ModItems {
 
     public static final Item COFFEE_CHERRY = registerItem(
             "coffee_cherry",
-            new Item(new Item.Settings()
+            new CoffeeCherryItem(new Item.Settings()
                     .food(new FoodComponent.Builder()
                             .saturationModifier(0.3F)
                             .nutrition(1)
