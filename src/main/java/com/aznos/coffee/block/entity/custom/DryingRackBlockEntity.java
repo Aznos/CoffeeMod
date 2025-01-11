@@ -4,6 +4,7 @@ import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.components.ModDataComponentTypes;
 import com.aznos.coffee.item.ModItems;
 import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -102,8 +103,24 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
                 if(level < 100) {
                     level++;
                     stack.set(ModDataComponentTypes.DEHYDRATION_LEVEL, level);
-                } else if(level == 100) {
+                }
+
+                if (level >= 25 && level < 50) {
+                    blockEntity.setStack(0, new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE1));
+                    markDirty(world, pos, state);
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+                } else if (level >= 50 && level < 75) {
+                    blockEntity.setStack(0, new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE2));
+                    markDirty(world, pos, state);
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+                } else if (level >= 75 && level < 100) {
+                    blockEntity.setStack(0, new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE3));
+                    markDirty(world, pos, state);
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+                } else if (level == 100) {
                     blockEntity.setStack(0, new ItemStack(ModItems.DEHYDRATED_COFFEE_BEAN));
+                    markDirty(world, pos, state);
+                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
                 }
             }
         }

@@ -55,6 +55,21 @@ public class ModItems {
             new RawCoffeeBeanItem(new Item.Settings())
     );
 
+    public static final Item RAW_COFFEE_BEAN_STAGE1 = registerItem(
+            "raw_coffee_bean_stage1",
+            new RawCoffeeBeanItem(new Item.Settings())
+    );
+
+    public static final Item RAW_COFFEE_BEAN_STAGE2 = registerItem(
+            "raw_coffee_bean_stage2",
+            new RawCoffeeBeanItem(new Item.Settings())
+    );
+
+    public static final Item RAW_COFFEE_BEAN_STAGE3 = registerItem(
+            "raw_coffee_bean_stage3",
+            new RawCoffeeBeanItem(new Item.Settings())
+    );
+
     public static final Item DEHYDRATED_COFFEE_BEAN = registerItem(
             "dehydrated_coffee_bean",
             new Item(new Item.Settings())

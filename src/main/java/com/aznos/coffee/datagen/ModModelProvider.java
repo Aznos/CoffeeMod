@@ -24,6 +24,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.COFFEE_CUP, Models.GENERATED);
         itemModelGenerator.register(ModItems.COFFEE_CHERRY, Models.GENERATED);
         itemModelGenerator.register(ModItems.RAW_COFFEE_BEAN, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_COFFEE_BEAN_STAGE1, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_COFFEE_BEAN_STAGE2, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_COFFEE_BEAN_STAGE3, Models.GENERATED);
         itemModelGenerator.register(ModItems.DEHYDRATED_COFFEE_BEAN, Models.GENERATED);
         itemModelGenerator.register(ModItems.ROASTED_COFFEE_BEAN, Models.GENERATED);
         itemModelGenerator.register(ModItems.MORTAR_AND_PESTLE, Models.GENERATED);
