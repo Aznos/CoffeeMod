@@ -2,6 +2,7 @@ package com.aznos.coffee.screen.custom;
 
 import com.aznos.coffee.block.entity.custom.BrewerBlockEntity;
 import com.aznos.coffee.screen.ModScreenHandlers;
+import com.aznos.coffee.screen.slot.OutputSlot;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -32,7 +33,7 @@ public class BrewerScreenHandler extends ScreenHandler {
         this.be = ((BrewerBlockEntity) blockEntity);
 
         this.addSlot(new Slot(inventory, 0, 54, 34));
-        this.addSlot(new Slot(inventory, 1, 104, 34));
+        this.addSlot(new OutputSlot(inventory, 1, 104, 34));
         this.addSlot(new Slot(inventory, 2, 151, 62));
 
         addPlayerInventory(playerInventory);

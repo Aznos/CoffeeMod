@@ -46,41 +46,27 @@ public class BrewerScreen extends HandledScreen<BrewerScreenHandler> {
 
         RenderSystem.setShaderTexture(0, WATER_CAPACITY_TEXTURE);
 
-        // 3) Figure out how “full” the brewer is
-        int water     = handler.getWaterAmount();  // e.g. 400 mB
-        int capacity  = handler.getTankCapacity(); // e.g. 1000 mB
-        int barHeight = 50;                        // your texture is 50 px tall
+        int water = handler.getWaterAmount();
+        int capacity = handler.getTankCapacity();
+        int barHeight = 50;
 
-        if (capacity <= 0) {
-            return; // avoid divide-by-zero if something goes wrong
-        }
-
-        // This computes how many pixels tall the fill portion should be
-        // If brewer is half full, filled will be 25, etc.
+        if(capacity <= 0) return;
         int filled = water * barHeight / capacity;
 
-        // 4) Draw only the filled portion from the bottom up
-        //
-        // If 'filled' is, say, 20, we want the bottom 20 pixels of the texture.
-        // That means we skip the top (50 - 20) = 30 pixels of the texture.
-        // We'll also move the draw position down so it lines up at the bottom.
+        if(filled > 0) {
+            int textureX = 0;
+            int textureY = barHeight - filled;
+            int drawX = barX;
+            int drawY = barY + (barHeight - filled);
+            int width = 16;
+            int height = filled;
 
-        if (filled > 0) {
-            int textureX = 0;                    // left edge of your water_bar.png
-            int textureY = barHeight - filled;   // skip the top portion
-            int drawX    = barX;
-            int drawY    = barY + (barHeight - filled); // move down
-            int width    = 16;                   // your texture is 16 wide
-            int height   = filled;               // just the bottom 'filled' segment
-
-            // The last two params in drawTexture are the total texture size
-            // (16 wide, 50 tall). This ensures the partial draw is correct.
             context.drawTexture(
                     WATER_CAPACITY_TEXTURE,
-                    drawX, drawY,         // on-screen location
-                    textureX, textureY,   // where to start in the .png
-                    width, height,        // how much of the .png to draw
-                    16, 50                // total size of the entire texture
+                    drawX, drawY,
+                    textureX, textureY,
+                    width, height,
+                    16, 50
             );
         }
     }
