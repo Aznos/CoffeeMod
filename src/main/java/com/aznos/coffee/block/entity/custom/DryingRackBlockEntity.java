@@ -105,23 +105,22 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
                     stack.set(ModDataComponentTypes.DEHYDRATION_LEVEL, level);
                 }
 
-                if (level >= 25 && level < 50) {
-                    blockEntity.setStack(0, new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE1));
-                    markDirty(world, pos, state);
-                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
-                } else if (level >= 50 && level < 75) {
-                    blockEntity.setStack(0, new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE2));
-                    markDirty(world, pos, state);
-                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
-                } else if (level >= 75 && level < 100) {
-                    blockEntity.setStack(0, new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE3));
-                    markDirty(world, pos, state);
-                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
-                } else if (level == 100) {
-                    blockEntity.setStack(0, new ItemStack(ModItems.DEHYDRATED_COFFEE_BEAN));
-                    markDirty(world, pos, state);
-                    world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+                ItemStack newStack = stack.copy();
+                if(level >= 25 && level < 50) {
+                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE1);
+                } else if(level >= 50 && level < 75) {
+                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE2);
+                } else if(level >= 75 && level < 100) {
+                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE3);
+                } else if(level == 100) {
+                    newStack = new ItemStack(ModItems.DEHYDRATED_COFFEE_BEAN);
                 }
+
+                newStack.set(ModDataComponentTypes.DEHYDRATION_LEVEL, level);
+
+                blockEntity.setStack(0, newStack);
+                markDirty(world, pos, state);
+                world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
             }
         }
     }
