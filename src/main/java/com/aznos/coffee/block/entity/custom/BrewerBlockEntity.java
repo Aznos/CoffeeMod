@@ -20,6 +20,8 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -41,6 +43,10 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
     public static final int TANK_CAPACITY = 1000;
     public static final int WATER_PER_BREW = 200;
     private int waterAmount = 0;
+
+    private boolean isBrewing = false;
+    private final int soundTickDelay = 20;
+    private int soundTicks = 0;
 
     public BrewerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BREWER_BE, pos, state);
@@ -117,6 +123,7 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
         handleBucketInsertion();
 
         if(hasRecipe() && canInsertIntoOutputSlot()) {
+            isBrewing = true;
             increaseCraftingProgress();
             markDirty(world, pos, state);
 
@@ -125,7 +132,24 @@ public class BrewerBlockEntity extends BlockEntity implements ExtendedScreenHand
                 resetProgress();
             }
         } else {
+            isBrewing = false;
             resetProgress();
+        }
+
+        if (isBrewing) {
+            soundTicks++;
+            if (soundTicks >= soundTickDelay) {
+                startBrewingSound(world, pos);
+                soundTicks = 0;
+            }
+        } else {
+            soundTicks = 0;
+        }
+    }
+
+    private void startBrewingSound(World world, BlockPos pos) {
+        if(!world.isClient) {
+            world.playSound(null, pos, SoundEvents.BLOCK_BREWING_STAND_BREW, SoundCategory.BLOCKS, 1.0f, 1.0f);
         }
     }
 
