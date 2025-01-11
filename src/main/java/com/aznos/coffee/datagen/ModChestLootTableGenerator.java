@@ -25,13 +25,9 @@ public class ModChestLootTableGenerator extends SimpleFabricLootTableProvider {
     public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> lootTableBiConsumer) {
         RegistryKey<LootTable> plainsHouseLootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.of("minecraft", "chests/village/village_plains_house"));
 
-        // Create a new loot pool with your item entry
-        LootPool.Builder poolBuilder = LootPool.builder()
-                .rolls(ConstantLootNumberProvider.create(1))
-                .with(ItemEntry.builder(ModItems.COFFEE_CHERRY_SEEDS)
-                        .weight(9999)); // Adjust weight as needed
+        LootPool.Builder poolBuilder = LootPool.builder().rolls(ConstantLootNumberProvider.create(1)).with(ItemEntry.builder(ModItems.COFFEE_CHERRY_SEEDS)
+                .weight(80));
 
-        // Add the new pool to the existing loot table
         lootTableBiConsumer.accept(plainsHouseLootTableKey, LootTable.builder().pool(poolBuilder));
     }
 }
