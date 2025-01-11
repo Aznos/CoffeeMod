@@ -1,5 +1,6 @@
 package com.aznos.coffee;
 
+import com.aznos.coffee.datagen.ModChestLootTableGenerator;
 import com.aznos.coffee.datagen.ModLootTableGenerator;
 import com.aznos.coffee.datagen.ModModelProvider;
 import com.aznos.coffee.datagen.ModRecipeGenerator;
@@ -13,5 +14,6 @@ public class CoffeeDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModLootTableGenerator::new);
         pack.addProvider(ModRecipeGenerator::new);
+        pack.addProvider(ModChestLootTableGenerator::new);
     }
 }
