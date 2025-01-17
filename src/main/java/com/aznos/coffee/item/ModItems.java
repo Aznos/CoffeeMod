@@ -7,8 +7,6 @@ import com.aznos.coffee.item.custom.CoffeeCupItem;
 import com.aznos.coffee.item.custom.MortarAndPestle;
 import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
 import net.minecraft.component.type.FoodComponent;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -19,7 +17,6 @@ public class ModItems {
     public static final FoodComponent COFFEE_CUP_COMPONENT = new FoodComponent.Builder()
             .alwaysEdible()
             .snack()
-            .statusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20 * 300, 1, false, false, false), 1.0F)
             .build();
 
     public static final Item COFFEE_CUP = registerItem(

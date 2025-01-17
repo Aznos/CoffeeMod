@@ -3,10 +3,13 @@
   "id": "coffee",
   "version": "${version}",
   "name": "Coffee",
-  "description": "",
-  "authors": [],
-  "contact": {},
-  "license": "All-Rights-Reserved",
+  "description": "Ever wanted to bring your caffeine addiction to Minecraft? Now you can!",
+  "authors": ["Aznos"],
+  "contact": {
+    "sources": "https://github.com/Aznos/CoffeeMod",
+    "issues": "https://github.com/Aznos/CoffeeMod/issues"
+  },
+  "license": "ARR",
   "icon": "assets/coffee/icon.png",
   "environment": "*",
   "entrypoints": {

@@ -4,7 +4,7 @@
 		"0": "minecraft:block/gray_concrete",
 		"1": "minecraft:block/white_concrete",
 		"3": "coffee:block/brewer_glass",
-		"particle": "minecraft:block/block/gray_concrete"
+		"particle": "minecraft:block/gray_concrete"
 	},
 	"elements": [
 		{

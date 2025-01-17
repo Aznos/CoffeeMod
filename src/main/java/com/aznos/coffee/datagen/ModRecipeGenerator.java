@@ -65,6 +65,11 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(Blocks.GLASS_PANE), conditionsFromItem(Blocks.GLASS_PANE))
                 .offerTo(exporter);
 
+        ShapelessRecipeJsonBuilder.create(
+                RecipeCategory.FOOD,
+                ModItems.COFFEE_CUP
+        ).input(ModItems.COFFEE_CUP).input(Items.SUGAR).criterion(FabricRecipeProvider.hasItem(ModItems.COFFEE_CUP), FabricRecipeProvider.conditionsFromItem(ModItems.COFFEE_CUP)).criterion(FabricRecipeProvider.hasItem(Items.SUGAR), FabricRecipeProvider.conditionsFromItem(Items.SUGAR)).offerTo(exporter);
+
         offerSmelting(exporter, Collections.singletonList(ModItems.DEHYDRATED_COFFEE_BEAN), RecipeCategory.FOOD, ModItems.ROASTED_COFFEE_BEAN, 0.4f, 60, Coffee.MOD_ID);
     }
 }
