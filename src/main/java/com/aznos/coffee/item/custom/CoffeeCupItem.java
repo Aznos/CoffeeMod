@@ -7,8 +7,13 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class CoffeeCupItem extends Item {
     private static final int MAX_SUGARS = 4;
@@ -39,5 +44,16 @@ public class CoffeeCupItem extends Item {
         if(!world.isClient && sugars < MAX_SUGARS) {
             sugars++;
         }
+
+        super.onCraft(stack, world);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        tooltip.add(Text.literal("Sugars: " + sugars).formatted(Formatting.GRAY));
+        tooltip.add(Text.literal("Each sugar added gives 30 seconds of duration, with a maximum of 4").formatted(Formatting.GRAY));
+
+
+        super.appendTooltip(stack, context, tooltip, type);
     }
 }
