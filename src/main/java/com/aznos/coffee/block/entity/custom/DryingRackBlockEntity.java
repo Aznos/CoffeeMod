@@ -4,9 +4,7 @@ import com.aznos.coffee.block.entity.ModBlockEntities;
 import com.aznos.coffee.components.ModDataComponentTypes;
 import com.aznos.coffee.item.ModItems;
 import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
@@ -152,10 +150,25 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
 
     private static boolean isNearHeatSource(World world, BlockPos pos) {
         int radius = 2;
-        for (BlockPos checkPos : BlockPos.iterate(pos.add(-radius, -radius, -radius), pos.add(radius, radius, radius))) {
-            Block blockAt = world.getBlockState(checkPos).getBlock();
-            if(HEAT_SOURCES.contains(blockAt)) return true;
+        for(BlockPos checkPos : BlockPos.iterate(pos.add(-radius, -radius, -radius), pos.add(radius, radius, radius))) {
+            BlockState blockState = world.getBlockState(checkPos);
+            Block blockAt = blockState.getBlock();
+
+            if(blockAt == Blocks.FIRE || blockAt == Blocks.SOUL_FIRE || blockAt == Blocks.LAVA || blockAt == Blocks.MAGMA_BLOCK) {
+                return true;
+            }
+
+            if(blockAt instanceof CampfireBlock) {
+                boolean lit = blockState.get(CampfireBlock.LIT);
+                if (lit) return true;
+            }
+
+            if(blockAt instanceof AbstractFurnaceBlock) {
+                boolean lit = blockState.get(AbstractFurnaceBlock.LIT);
+                if(lit) return true;
+            }
         }
+
         return false;
     }
 

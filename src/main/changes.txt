@@ -1,0 +1,3 @@
+- Made drying rack loose progress when it rains
+- Made drying rack dry faster when in direct sunlight
+- Made drying rack dry faster when near a heat source
