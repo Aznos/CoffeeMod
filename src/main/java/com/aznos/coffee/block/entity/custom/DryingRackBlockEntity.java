@@ -6,6 +6,7 @@ import com.aznos.coffee.item.ModItems;
 import com.aznos.coffee.item.custom.RawCoffeeBeanItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
@@ -18,11 +19,21 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class DryingRackBlockEntity extends BlockEntity implements Inventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+
+    private static final List<Block> HEAT_SOURCES = Arrays.asList(
+            Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.LAVA, Blocks.CAMPFIRE,
+            Blocks.SOUL_CAMPFIRE, Blocks.FURNACE, Blocks.BLAST_FURNACE,
+            Blocks.SMOKER, Blocks.MAGMA_BLOCK
+    );
 
     public DryingRackBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DRYING_RACK_BE, pos, state);
@@ -100,29 +111,52 @@ public class DryingRackBlockEntity extends BlockEntity implements Inventory {
                 Integer levelObj = stack.get(ModDataComponentTypes.DEHYDRATION_LEVEL);
                 int level = (levelObj != null) ? levelObj : 0;
 
-                if(level < 100) {
-                    level++;
-                    stack.set(ModDataComponentTypes.DEHYDRATION_LEVEL, level);
+                int drynessChange = 1;
+                boolean isRaining = world.isRaining();
+                boolean skyExposed = world.isSkyVisible(pos.up());
+
+                if(isRaining && skyExposed) {
+                    drynessChange = -1;
+                } else {
+                    if(skyExposed && !isRaining) {
+                        drynessChange += 1;
+                    }
+
+                    if(isNearHeatSource(world, pos)) {
+                        drynessChange += 1;
+                    }
                 }
 
-                ItemStack newStack = stack.copy();
-                if(level >= 25 && level < 50) {
-                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE1);
-                } else if(level >= 50 && level < 75) {
-                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE2);
-                } else if(level >= 75 && level < 100) {
-                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE3);
-                } else if(level == 100) {
+                level = MathHelper.clamp(level + drynessChange, 0, 100);
+                ItemStack newStack;
+                if(level >= 100) {
                     newStack = new ItemStack(ModItems.DEHYDRATED_COFFEE_BEAN);
+                } else if(level >= 75) {
+                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE3);
+                } else if(level >= 50) {
+                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE2);
+                } else if(level >= 25) {
+                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN_STAGE1);
+                } else {
+                    newStack = new ItemStack(ModItems.RAW_COFFEE_BEAN);
                 }
 
                 newStack.set(ModDataComponentTypes.DEHYDRATION_LEVEL, level);
-
                 blockEntity.setStack(0, newStack);
+
                 markDirty(world, pos, state);
                 world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
             }
         }
+    }
+
+    private static boolean isNearHeatSource(World world, BlockPos pos) {
+        int radius = 2;
+        for (BlockPos checkPos : BlockPos.iterate(pos.add(-radius, -radius, -radius), pos.add(radius, radius, radius))) {
+            Block blockAt = world.getBlockState(checkPos).getBlock();
+            if(HEAT_SOURCES.contains(blockAt)) return true;
+        }
+        return false;
     }
 
     @Override
