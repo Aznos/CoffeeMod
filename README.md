@@ -1,11 +1,4 @@
-# Coffee Addiction Mod
-This is the github repo for the Coffee Addiction mod for FabricMC 1.21
-
-You can find the download links here:
-<a href="https://www.curseforge.com/minecraft/mc-mods/coffee-addiction">Curseforge</a>
-<a href="https://modrinth.com/mod/coffee-addiction">Modrinth</a>
-
-### About
+### **The Coffee mod**
 Your caffeine addiction, in minecraft.
 
 Go all the way from picking the individual coffee cherries, plucking the beans out of the cherry, dehydrating the beans, crushing them, and putting them in a brewer.
@@ -13,7 +6,7 @@ Go all the way from picking the individual coffee cherries, plucking the beans o
 <a href="https://ibb.co/tm80yFv"><img src="https://i.ibb.co/tm80yFv/Screenshot-2025-01-11-at-3-18-22-PM.png" alt="Picture of the brewing machine" border="0"></a>
 
 
-The best part - drinking coffee gives you extra boosts to reward you for the hard work you had to do to make it, you get Speed II for 5 whole minutes.
+The best part - drinking coffee gives you extra boosts to reward you for the hard work you had to do to make it, you can get Speed II for up to 4 whole minutes.
 However, drinking coffee gives you one heart of damage
 
 
@@ -35,4 +28,6 @@ By now you should have a roasted coffee bean, to turn it into coffee powder that
 
 Now the last step in making your coffee, is to get a brewer. You'll place your coffee powder in the left most slot, and a water bucket in the right most slot. The bucket provides 1000mB of water, and each brew requires 200mB of water.
 
-If both of these requirements are filled, you should now have a coffee cup, enjoy bringing your caffeine addiction into minecraft
+If both of these requirements are filled, you should now have a coffee cup, however drinking this by itself will only give you speed II for 2 minutes. You can add upto 4 sugars to the coffee cup by placing the coffee cup and sugar into a crafting grid, each sugar you add will add 30 seconds onto the duration of speed you get
+
+Enjoy bringing your caffeine addiction into minecraft
